@@ -357,9 +357,6 @@ while True:
 
         time.sleep(0.1)
         kameraduzeltme()
-        pydirectinput.keyDown("e")
-        time.sleep(1.1)
-        pydirectinput.keyUp("e")
         kameracounter = 0
         chsecimsorgu = resimsorgulama(chsecimresim)
         loginsorgu = resimsorgulama(loginekranresim)
@@ -395,7 +392,6 @@ while True:
         if not tiklandimi == False: # metine tıklandı anlamına geliyor
             pyautogui.moveTo(70, 70)
             for i in range(60): # 60 saniye dönecek
-                print(i)
                 botkontrolsekme()
                 stuck = metinchoose()
                 if i == 0:
@@ -421,15 +417,12 @@ while True:
                 if metincanazaliyomu:
                     metinkeserkenaramayap = 1
                     if metinkeserkenaramayap == 1:
-                        print("metinaraması yapılıyor")
                         x, y = metindetectwhilekill()
                         if x == None:
                             pydirectinput.keyDown("q")
                             time.sleep(0.7)
                             pydirectinput.keyUp("q")
                         if not x == None:
-                            print("metinbulundu")
-                            print(x)
                             metinkeserkenaramayap = 0
 
 
