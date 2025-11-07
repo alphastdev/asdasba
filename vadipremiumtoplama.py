@@ -253,6 +253,7 @@ def canarama():
                 pyautogui.moveTo(781, 615)
                 time.sleep(0.1)
                 mouse_leftclick(wins[0], 781, 615)
+                escekran = resimsorgulama(escscreen)
             if escekran:
                 pyautogui.moveTo(410,385)
                 time.sleep(0.1)
