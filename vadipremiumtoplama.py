@@ -244,17 +244,16 @@ def canarama():
         result = cv2.matchTemplate(frame, potsuzresim, cv2.TM_CCOEFF_NORMED)
         loc = np.where(result >= threshold)
         found = False
-        print(found)
         if loc[0].size > 0:
             found = True
         if found:
+            print("can azaldı")
             escekran = resimsorgulama(escscreen)
             if not escekran:
                 pyautogui.moveTo(781, 615)
                 time.sleep(0.1)
                 mouse_leftclick(wins[0], 781, 615)
             if escekran:
-                print("esc açık karakter at")
                 pyautogui.moveTo(410,385)
                 time.sleep(0.1)
                 mouse_leftclick(wins[0],410,385)
@@ -279,7 +278,7 @@ def metincan():
         # if not found:
         #     print("Bot Koruma Kontrol Edildi ve Bot Koruma Yoktur.")
         if found:
-            print("dalgaaaa")
+            pass
         return found
 
 def kameraduzeltme():
@@ -348,9 +347,10 @@ def mouse_leftclick(hwnd, x, y):
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lparam)
         time.sleep(0.02)
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONUP, None, lparam)
-        print(f"Tıklama gönderildi -> {win32gui.GetWindowText(hwnd)} | x={x}, y={y}")
+        #print(f"Tıklama gönderildi -> {win32gui.GetWindowText(hwnd)} | x={x}, y={y}")
     except Exception as e:
-        print(f"Tıklama hatası: {e}")
+        pass
+        #print(f"Tıklama hatası: {e}")
 
 def mouse_rightclick(hwnd, x, y):
     try:
@@ -495,7 +495,7 @@ while True:
         pydirectinput.keyUp("q")
         time.sleep(0.2)
         #pydirectinput.press("q", presses=5)
-        print(f"{sayi} geldi → 'q' basıldı.")
+        #print(f"{sayi} geldi → 'q' basıldı.")
 
 
 #def girisyap():
