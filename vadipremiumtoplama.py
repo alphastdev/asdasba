@@ -96,6 +96,8 @@ chsecimresim = cv2.imread('chsecimekrani.png', cv2.IMREAD_COLOR)
 loginekranresim = cv2.imread('loginekran.png', cv2.IMREAD_COLOR)
 karakterekranresim = cv2.imread('karakterekran.png', cv2.IMREAD_COLOR)
 
+potsuzresim = cv2.imread('undead/potsuzresim.png')
+
 def resimsorgulama(resim):
     with mss.mss() as sct:
         monitor = {
@@ -228,6 +230,36 @@ def metinchoose():
         #     #print("Metine Tıklandı")
         return found
 
+def canarama():
+    with mss.mss() as sct:
+        monitor = {
+            "top": 595,
+            "left": 63,
+            "width": 60,
+            "height": 17
+        }
+        frame = np.array(sct.grab(monitor))
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+
+        result = cv2.matchTemplate(frame, potsuzresim, cv2.TM_CCOEFF_NORMED)
+        loc = np.where(result >= threshold)
+        found = False
+        print(found)
+        if loc[0].size > 0:
+            found = True
+        if found:
+            escekran = resimsorgulama(escscreen)
+            if not escekran:
+                pyautogui.moveTo(781, 615)
+                time.sleep(0.1)
+                mouse_leftclick(wins[0], 781, 615)
+            if escekran:
+                print("esc açık karakter at")
+                pyautogui.moveTo(410,385)
+                time.sleep(0.1)
+                mouse_leftclick(wins[0],410,385)
+                time.sleep(1.2)
+
 def metincan():
     with mss.mss() as sct:
         monitor = {
@@ -312,7 +344,7 @@ def mouse_leftclick(hwnd, x, y):
     try:
         bring_to_front(hwnd)
         time.sleep(0.05)
-        lparam = win32api.MAKELONG(x, y)
+        lparam = win32api.MAKELONG(x-8, y-29)
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lparam)
         time.sleep(0.02)
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONUP, None, lparam)
@@ -344,6 +376,7 @@ tiklandimi = None
 kameraduzeltme()
 metincanazaliyomu = None
 while True:
+    canarama()
     kameracounter = kameracounter + 1
     if kameracounter >= 20:
         pydirectinput.keyDown("1")
@@ -392,6 +425,7 @@ while True:
         if not tiklandimi == False: # metine tıklandı anlamına geliyor
             pyautogui.moveTo(70, 70)
             for i in range(60): # 60 saniye dönecek
+                canarama()
                 botkontrolsekme()
                 stuck = metinchoose()
                 if i == 0:
