@@ -29,6 +29,7 @@ chsecimresim = cv2.imread('chsecimekrani.png', cv2.IMREAD_COLOR)
 loginekranresim = cv2.imread('loginekran.png', cv2.IMREAD_COLOR)
 karakterekranresim = cv2.imread('karakterekran.png', cv2.IMREAD_COLOR)
 potsuzresim = cv2.imread('undead/potsuzresim.png')
+oyuniciresim = cv2.imread('oyunicindemi.png')
 
 def ekrantoparlama():
     TARGET = "Misali2 (Ebedi)"
@@ -208,7 +209,7 @@ while True:
     frame = ekranss(800,600)
     canarama()
     kameracounter = kameracounter + 1
-    if kameracounter >= 50:
+    if kameracounter >= 30:
         pydirectinput.keyDown("1")
         time.sleep(0.1)
         pydirectinput.keyUp("1")
@@ -221,11 +222,9 @@ while True:
         time.sleep(0.1)
         kameraduzeltme()
         kameracounter = 0
-        chsecimsorgu = resimsorgulama(chsecimresim,frame) #Burası değişecek
-        loginsorgu = resimsorgulama(loginekranresim,frame) #Burası değişecek
-        karaktersorgu = resimsorgulama(karakterekranresim,frame) #Burası değişecek
+        oyundami = resimsorgulama(oyuniciresim,frame) #Burası değişecek
 
-        if chsecimsorgu or loginsorgu or karaktersorgu: #Burası değişecek Oyun içinden bir ekran yoksa login deneyecek!
+        if not oyundami: #Burası değişecek Oyun içinden bir ekran yoksa login deneyecek!
             autologin.autologin(wins)
 
     botkontrol = resimsorgulama(template,frame)
@@ -239,7 +238,6 @@ while True:
         if counter >= 14:
             pydirectinput.keyDown("w")
     if not x == None:
-        pydirectinput.keyUp("q")
         counter = 0
         pydirectinput.keyUp("w")
         if len(wins) == 0:
@@ -324,5 +322,11 @@ while True:
     if x == None:
         pyautogui.moveTo(70, 70)
         pydirectinput.keyDown("q")
+        time.sleep(0.2)
+        pydirectinput.keyUp("q")
+        time.sleep(0.05)
+        pydirectinput.keyDown("q")
+        time.sleep(0.2)
+        pydirectinput.keyUp("q")
         # pydirectinput.press("q", presses=5)
         # print(f"{sayi} geldi → 'q' basıldı.")
