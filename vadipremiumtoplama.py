@@ -212,19 +212,37 @@ def metindetectwhilekill():
             "width": 800,
             "height": 260
         }
-        sct_img = sct.grab(monitor)
-        frame = np.array(sct_img)
+
+        # EKRAN GÖRÜNTÜSÜ
+        frame = np.array(sct.grab(monitor))
         frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
 
-        results = model.predict(source=frame)
+        # --- HIZ İÇİN KÜÇÜLTME ---
+        new_w, new_h = 400, 130   # oran korundu
+        scale_x = monitor["width"] / new_w
+        scale_y = monitor["height"] / new_h
 
-        boxes = results[0].boxes.xyxy  # x1, y1, x2, y2 formatında
+        small = cv2.resize(frame, (new_w, new_h))
+
+        # YOLO TAHMİN
+        results = model(small, imgsz=new_w, conf=0.5, max_det=1, device=device)
+
+        boxes = results[0].boxes.xyxy
         if len(boxes) > 0:
             x1, y1, x2, y2 = boxes[0].tolist()
+
+            # --- KOORDİNATLARI ORİJİNAL BOYUTA GERİ DÖNÜŞTÜRME ---
+            x1 *= scale_x
+            x2 *= scale_x
+            y1 *= scale_y
+            y2 *= scale_y
+
             center_x = int((x1 + x2) / 2)
             center_y = int((y1 + y2) / 2)
             return center_x, center_y
+
         return None, None
+
 
 def metinchoose():
     with mss.mss() as sct:
