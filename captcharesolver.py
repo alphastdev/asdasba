@@ -132,6 +132,7 @@ def solve_captcha(wins_param):
                     pyautogui.moveTo(sol_alt_x + 148, sol_alt_y + 346)
                     time.sleep(0.1)
                     mouse_click(target, sol_alt_x + 148, sol_alt_y + 346)
+                    time.sleep(1)
                     break
 
                 if not best_match:
