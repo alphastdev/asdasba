@@ -176,15 +176,27 @@ def canarama():
             if not resimsorgulama(escscreen, ekranss(800,600)):
                 pyautogui.moveTo(781, 615)
                 time.sleep(0.1)
+                frame = np.array(sct.grab(monitor))
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+                oldumu = resimsorgulama(olumekranresim, frame)
+                if oldumu:
+                    gist_set("olenvar", True)
+                    karakteratbekle()
                 mouse_leftclick(wins[0], 781, 615)
             if resimsorgulama(escscreen, ekranss(800,600)):
                 pyautogui.moveTo(410,385)
                 time.sleep(0.1)
+                frame = np.array(sct.grab(monitor))
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+                oldumu = resimsorgulama(olumekranresim, frame)
+                if oldumu:
+                    gist_set("olenvar", True)
+                    karakteratbekle()
                 mouse_leftclick(wins[0],410,385)
                 time.sleep(1.2)
 
 GIST_ID = "fded21e4c8190c1b36cb6c26586ab5e5"
-TOKEN = "ghp_KQluWynDbgmq04NJODO6ee9fyQASa90FHYQ"
+TOKEN = "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"
 
 check_interval = 8
 last_check = time.time()
