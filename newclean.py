@@ -196,7 +196,7 @@ def canarama():
                 time.sleep(1.2)
 
 GIST_ID = "fded21e4c8190c1b36cb6c26586ab5e5"
-TOKEN = "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"
+TOKEN = "ghp_Yyus4SUHOgQEMQIRedveMQX3EChmMp06zpt"
 
 check_interval = 8
 last_check = time.time()
