@@ -336,8 +336,7 @@ while True:
                 pydirectinput.keyUp("s")
                 time.sleep(0.1)
                 pydirectinput.keyUp("q")
-                time.sleep(0.1)
-                time.sleep(1)
+                time.sleep(0.5)
                 x, y = metindetect(800, 600) # tekrar none geliyor bazen
                 if not x == None:
                     pyautogui.moveTo(x, y + 5)
@@ -345,6 +344,7 @@ while True:
                     mouse_leftclick(wins[0], x, y + 5)
                 x, y = None, None
                 aramayap = True
+                time.sleep(1)
 
         if STATE == "metinkesiliyor":
             if metin_start_time is not None:
@@ -376,8 +376,10 @@ while True:
             pydirectinput.keyDown("esc")
             time.sleep(0.1)
             pydirectinput.keyUp("esc")
+            time.sleep(0.1)
+            pydirectinput.keyDown("e")
             time.sleep(1)
-            press_key("e", 1, 0.3)
+            pydirectinput.keyUp("e")
             kameraduzeltme()
 
         if STATE == "stuck":
