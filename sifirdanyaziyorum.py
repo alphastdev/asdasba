@@ -237,6 +237,8 @@ lookingcounter = None
 
 kameraduzeltme()
 
+STATE = "fck"
+
 while True:
     try:
         print(STATE)
