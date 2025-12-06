@@ -317,11 +317,13 @@ while True:
 
 
         if STATE == "looking":
+            time.sleep(0.3)
             if lookingcounter is None:
                 metin_start_time = time.time()
             if lookingcounter is not None:
                 lookingcounterkalansure = time.time() - lookingcounter
                 if lookingcounterkalansure >= 15:
+                    print("kameraduzelt")
                     kameraduzeltme()
             x, y = metindetect(800,600)
             if x == None:
@@ -342,7 +344,6 @@ while True:
                     mouse_leftclick(wins[0], x, y + 5)
                 x, y = None, None
                 aramayap = True
-                time.sleep(0.2)
 
         if STATE == "metinkesiliyor":
             if metin_start_time is not None:
