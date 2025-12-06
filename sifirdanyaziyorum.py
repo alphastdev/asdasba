@@ -318,7 +318,6 @@ while True:
 
 
         if STATE == "looking":
-            time.sleep(0.3)
             if lookingcounter is None:
                 metin_start_time = time.time()
             if lookingcounter is not None:
@@ -338,6 +337,7 @@ while True:
                 time.sleep(0.1)
                 pydirectinput.keyUp("q")
                 time.sleep(0.1)
+                time.sleep(1)
                 x, y = metindetect(800, 600) # tekrar none geliyor bazen
                 if not x == None:
                     pyautogui.moveTo(x, y + 5)
