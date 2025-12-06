@@ -189,6 +189,7 @@ def mouse_leftclick(hwnd, x, y):
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lparam)
         time.sleep(0.02)
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONUP, None, lparam)
+        print("tıklandı kardeş aksjfkjasfkjsakfjsakjfasf")
     except:
         pass
 
