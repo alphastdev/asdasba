@@ -304,7 +304,7 @@ while True:
         if not oyundami:
             STATE = "login"
 
-        frame = ekranss(0, 0, 832, 640)
+        frame = ekranss(0, 0, 800, 600)
 
         botgeldimi = resimsorgulama(template,frame)
         if botgeldimi:
@@ -318,7 +318,7 @@ while True:
                 if lookingcounterkalansure >= 15:
                     lookingcounter = None
                     kameraduzeltme()
-            x, y = metindetect(800,600)
+            x, y = metindetect(832,640)
             if x == None:
                 pyautogui.moveTo(70, 70)
                 press_key("q",0.2,0.1)
@@ -330,7 +330,7 @@ while True:
                 time.sleep(0.1)
                 pydirectinput.keyUp("q")
                 time.sleep(0.5)
-                x, y = metindetect(800, 600) # tekrar none geliyor bazen
+                x, y = metindetect(832, 640) # tekrar none geliyor bazen
                 if not x == None:
                     pyautogui.moveTo(x, y + 5)
                     time.sleep(0.1)
@@ -346,7 +346,7 @@ while True:
                     metin_start_time = None
                     STATE = "notattacking"
             if aramayap == True:
-                x, y = metindetect(800,600)
+                x, y = metindetect(832,640)
                 if x == None:
                     pyautogui.moveTo(70, 70)
                     pydirectinput.keyDown("q")
