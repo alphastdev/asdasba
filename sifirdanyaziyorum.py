@@ -338,7 +338,7 @@ while True:
                 x, y = metindetect(800, 600) # tekrar none geliyor bazen
                 if not x == None:
                     pyautogui.moveTo(x, y + 5)
-                    time.sleep(0.05)
+                    time.sleep(0.1)
                     mouse_leftclick(wins[0], x, y + 5)
                 x, y = None, None
                 aramayap = True
