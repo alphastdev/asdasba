@@ -89,7 +89,7 @@ def metindetect(ekranboyutx, ekranboyuty):
 
         small = cv2.resize(frame, (new_w, new_h))
 
-        results = model(small, imgsz=new_w, conf=0.5, max_det=1, device=device)
+        results = model(small, imgsz=new_w, conf=0.5, max_det=1, device=device, verbose=False)
         boxes = results[0].boxes.xyxy
 
         # Hiç box yoksa direkt None dön
@@ -112,7 +112,7 @@ def kameraduzeltme():
     pydirectinput.keyDown("f"); time.sleep(1); pydirectinput.keyUp("f"); time.sleep(0.1)
     pydirectinput.keyDown("g"); time.sleep(1); pydirectinput.keyUp("g"); time.sleep(0.1)
     pydirectinput.keyDown("t"); time.sleep(0.7); pydirectinput.keyUp("t"); time.sleep(0.1)
-    lookingcounter = None
+
 
 def esyatoplama():
     sequence = [('w', 0.4), ('a', 0.4), ('s', 0.8), ('d', 0.7), ('w', 0.9)]
@@ -314,6 +314,7 @@ while True:
             if lookingcounter is not None:
                 lookingcounterkalansure = time.time() - lookingcounter
                 if lookingcounterkalansure >= 15:
+                    lookingcounter = None
                     kameraduzeltme()
             x, y = metindetect(800,600)
             if x == None:
