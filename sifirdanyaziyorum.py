@@ -310,7 +310,7 @@ while True:
 
         if STATE == "looking":
             if lookingcounter is None:
-                metin_start_time = time.time()
+                lookingcounter = time.time()
             if lookingcounter is not None:
                 lookingcounterkalansure = time.time() - lookingcounter
                 if lookingcounterkalansure >= 15:
