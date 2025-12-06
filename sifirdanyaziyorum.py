@@ -112,6 +112,7 @@ def kameraduzeltme():
     pydirectinput.keyDown("f"); time.sleep(1); pydirectinput.keyUp("f"); time.sleep(0.1)
     pydirectinput.keyDown("g"); time.sleep(1); pydirectinput.keyUp("g"); time.sleep(0.1)
     pydirectinput.keyDown("t"); time.sleep(0.7); pydirectinput.keyUp("t"); time.sleep(0.1)
+    lookingcounter = None
 
 def esyatoplama():
     sequence = [('w', 0.4), ('a', 0.4), ('s', 0.8), ('d', 0.7), ('w', 0.9)]
@@ -229,6 +230,7 @@ ekrantoparlama()
 kesilenmetin = 0
 counterstuck = 0
 aramayap = False
+lookingcounter = None
 
 while True:
     try:
@@ -307,6 +309,12 @@ while True:
 
 
         if STATE == "looking":
+            if lookingcounter is None:
+                metin_start_time = time.time()
+            if lookingcounter is not None:
+                lookingcounterkalansure = time.time() - lookingcounter
+                if lookingcounterkalansure >= 15:
+                    kameraduzeltme()
             x, y = metindetect(800,600)
             if x == None:
                 pyautogui.moveTo(70, 70)
@@ -318,26 +326,29 @@ while True:
                 pydirectinput.keyUp("s")
                 time.sleep(0.1)
                 pydirectinput.keyUp("q")
-                time.sleep(0.3)
+                time.sleep(0.1)
                 x, y = metindetect(800, 600) # tekrar none geliyor bazen
-                pyautogui.moveTo(x, y + 5)
-                time.sleep(0.05)
-                mouse_leftclick(wins[0], x, y + 5)
+                if not x == None:
+                    pyautogui.moveTo(x, y + 5)
+                    time.sleep(0.05)
+                    mouse_leftclick(wins[0], x, y + 5)
                 x, y = None, None
                 aramayap = True
+                time.sleep(0.2)
 
         if STATE == "metinkesiliyor":
             if metin_start_time is not None:
                 elapsed = time.time() - metin_start_time
-                if elapsed >= 60:
+                if elapsed >= 30:
                     metin_start_time = None
                     STATE = "notattacking"
             if aramayap == True:
                 x, y = metindetect(800,600)
                 if x == None:
                     pyautogui.moveTo(70, 70)
-                    press_key("q",0.2,0.1)
-                    press_key("q", 0.2, 0.1)
+                    pydirectinput.keyDown("q")
+                    time.sleep(0.2)
+                    pydirectinput.keyUp("q")
                     time.sleep(0.15)
                 if not x == None:
                     aramayap = False
@@ -390,7 +401,7 @@ while True:
 
 
 
-        #print(STATE)
+        print(STATE)
 
 
 
