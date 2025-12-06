@@ -18,6 +18,10 @@ import autoselltas
 
 import traceback
 
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+
 # Windows API fonksiyonu
 GetAsyncKeyState = ctypes.windll.user32.GetAsyncKeyState
 
