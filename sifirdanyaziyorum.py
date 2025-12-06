@@ -189,7 +189,6 @@ def mouse_leftclick(hwnd, x, y):
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lparam)
         time.sleep(0.02)
         win32gui.SendMessage(hwnd, win32con.WM_LBUTTONUP, None, lparam)
-        print("tıklandı kardeş aksjfkjasfkjsakfjsakjfasf")
     except:
         pass
 
@@ -244,7 +243,6 @@ LAST_STATE = None
 
 while True:
     try:
-        print(STATE)
         time.sleep(0.1)
 
         if GetAsyncKeyState(VK_F1) & 0x8000:
@@ -316,7 +314,6 @@ while True:
             if lookingcounter is not None:
                 lookingcounterkalansure = time.time() - lookingcounter
                 if lookingcounterkalansure >= 15:
-                    print("kameraduzelt")
                     kameraduzeltme()
             x, y = metindetect(800,600)
             if x == None:
