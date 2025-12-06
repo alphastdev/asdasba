@@ -117,16 +117,19 @@ def kameraduzeltme():
 def esyatoplama():
     sequence = [('w', 0.4), ('a', 0.4), ('s', 0.8), ('d', 0.7), ('w', 0.9)]
     for key, hold in sequence:
+        press_key("z",0.1,0.1)
         pydirectinput.keyDown("z")
         time.sleep(0.1)
         pydirectinput.keyUp("z")
         pydirectinput.keyDown(key)
         time.sleep(hold)
         pydirectinput.keyUp(key)
+        press_key("z", 0.1, 0.1)
         pydirectinput.keyDown("z")
         time.sleep(0.1)
         pydirectinput.keyUp("z")
         time.sleep(0.05)
+        press_key("z", 0.1, 0.1)
 
 def karakterat():
     pyautogui.moveTo(785, 615)
@@ -231,6 +234,8 @@ kesilenmetin = 0
 counterstuck = 0
 aramayap = False
 lookingcounter = None
+
+kameraduzeltme()
 
 while True:
     try:
@@ -347,7 +352,7 @@ while True:
                 if x == None:
                     pyautogui.moveTo(70, 70)
                     pydirectinput.keyDown("q")
-                    time.sleep(0.2)
+                    time.sleep(0.5)
                     pydirectinput.keyUp("q")
                     time.sleep(0.15)
                 if not x == None:
