@@ -239,6 +239,7 @@ kameraduzeltme()
 
 while True:
     try:
+        print(STATE)
         time.sleep(0.1)
 
         if GetAsyncKeyState(VK_F1) & 0x8000:
@@ -406,7 +407,7 @@ while True:
 
 
 
-        print(STATE)
+
 
 
 
