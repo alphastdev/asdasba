@@ -18,9 +18,7 @@ import autoselltas
 
 import traceback
 
-import warnings
-warnings.filterwarnings("ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", category=UserWarning)
+
 
 # Windows API fonksiyonu
 GetAsyncKeyState = ctypes.windll.user32.GetAsyncKeyState
@@ -306,7 +304,7 @@ while True:
         if not oyundami:
             STATE = "login"
 
-        frame = ekranss(0, 0, 800, 600)
+        frame = ekranss(0, 0, 832, 640)
 
         botgeldimi = resimsorgulama(template,frame)
         if botgeldimi:
