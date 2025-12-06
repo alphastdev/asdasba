@@ -240,6 +240,8 @@ kameraduzeltme()
 
 STATE = "fck"
 
+LAST_STATE = None
+
 while True:
     try:
         print(STATE)
@@ -256,7 +258,7 @@ while True:
 
         metintiklandimi = resimsorgulama(onmetin,frame)
 
-        if not metintiklandimi:
+        if not metintiklandimi and not LAST_STATE == "metinkesiliyor":
             STATE = "looking"
             stuck_start_time = None
 
@@ -266,20 +268,13 @@ while True:
             if metinevuruyormu: # counter eklenecek ve 60 saniyeden fazla kesiliyorda kalırsa esc basacak.
                 stuck_start_time = None
                 STATE = "metinkesiliyor"
+                LAST_STATE = "metinkesiliyor"
                 if metin_start_time is None:
                     metin_start_time = time.time()
-                frame = ekranss(0, 0, 800, 600)
-                metintiklandimi = resimsorgulama(onmetin, frame)
                 frame = ekranss(595, 63, 60, 17)
                 canazaldimi = resimsorgulama(potsuzresim, frame)
                 if canazaldimi:
                     STATE = "hplost"
-                if metintiklandimi == False:
-                    kesilenmetin = kesilenmetin + 1
-                    metin_start_time = None
-                    print("kesilenmetin:")
-                    print(kesilenmetin)
-                    STATE = "collect"
             else:
                 # iki frame al, fark kontrolü
                 frame1 = ekranss(93, 735, 12, 12)
@@ -363,6 +358,8 @@ while True:
                 if not x == None:
                     aramayap = False
                     x, y = None, None
+
+        if LAST_STATE == "metinkesiliyor":
             frame = ekranss(0, 0, 800, 600)
             metintiklandimi = resimsorgulama(onmetin, frame)
             if metintiklandimi == False:
@@ -400,6 +397,7 @@ while True:
 
         if STATE == "collect":
             esyatoplama()
+            LAST_STATE = None
 
         if STATE == "bot_control":
             captcharesolver.solve_captcha(wins)
