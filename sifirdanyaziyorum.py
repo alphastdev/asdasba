@@ -310,8 +310,6 @@ while True:
         if botgeldimi:
             STATE = "bot_control"
 
-
-
         if STATE == "looking":
             if lookingcounter is None:
                 metin_start_time = time.time()
@@ -377,6 +375,7 @@ while True:
             pydirectinput.keyDown("e")
             time.sleep(1)
             pydirectinput.keyUp("e")
+            LAST_STATE = None
             kameraduzeltme()
 
         if STATE == "stuck":
