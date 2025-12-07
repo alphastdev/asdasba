@@ -79,27 +79,39 @@ def ekranss(x1, y1, x2, y2):
         frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
     return frame
 
-def metindetect():
+def metindetect(ekranboyutx, ekranboyuty):
     with mss.mss() as sct:
-        monitor = {
-            "top": 0,
-            "left": 0,
-            "width": 800,
-            "height": 600
-        }
-        sct_img = sct.grab(monitor)
-        frame = np.array(sct_img)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+        monitor = {"top": 0, "left": 0, "width": ekranboyutx, "height": ekranboyuty}
+        img = np.array(sct.grab(monitor))
+        frame = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
 
-        results = model.predict(source=frame, verbose=False)
+        # 👇 Küçültme tamamen iptal → model'e direkt full çözünürlük veriyoruz
+        results = model(
+            frame,
+            imgsz=ekranboyutx,   # genişliği veriyoruz, YOLO kare olmadığında otomatik ayarlar
+            conf=0.5,
+            max_det=1,
+            device=device,
+            verbose=False
+        )
 
-        boxes = results[0].boxes.xyxy  # x1, y1, x2, y2 formatında
-        if len(boxes) > 0:
-            x1, y1, x2, y2 = boxes[0].tolist()
-            center_x = int((x1 + x2) / 2)
-            center_y = int((y1 + y2) / 2)
-            return center_x, center_y
-        return None, None
+        boxes = results[0].boxes.xyxy
+
+        # Hiç box yoksa direkt None dön
+        if len(boxes) == 0:
+            return None, None
+
+        x1, y1, x2, y2 = boxes[0].tolist()
+
+        # Herhangi bir koordinat None ise yine None dön
+        if None in [x1, y1, x2, y2]:
+            return None, None
+
+        # Merkez hesaplama (kayıpsız — scaling yok)
+        center_x = int((x1 + x2) / 2)
+        center_y = int((y1 + y2) / 2)
+
+        return center_x, center_y
 
 
 def kameraduzeltme():
