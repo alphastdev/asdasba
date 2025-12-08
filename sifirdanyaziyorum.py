@@ -93,7 +93,8 @@ def metindetect(ekranboyutx, ekranboyuty, imgsize):
             imgsz=imgsize,        # YOLO kendi letterbox yapar
             conf=0.5,
             max_det=1,
-            device=device
+            device=device,
+            verbose=False
         )
 
         boxes = results[0].boxes.xyxy
@@ -398,6 +399,7 @@ while True:
         if STATE == "collect":
             esyatoplama()
             LAST_STATE = None
+            lookingcounter = None
 
         if STATE == "bot_control":
             captcharesolver.solve_captcha(wins)
