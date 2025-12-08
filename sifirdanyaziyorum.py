@@ -319,6 +319,7 @@ while True:
                 lookingcounterkalansure = time.time() - lookingcounter
                 if lookingcounterkalansure >= 15:
                     lookingcounter = None
+                    pydirectinput.keyDown("w")
                     kameraduzeltme()
             x, y = metindetect(800,600,640)
             if x == None:
@@ -326,6 +327,8 @@ while True:
                 press_key("q",0.2,0.1)
                 press_key("q", 0.2, 0.1)
             if not x == None:
+                pydirectinput.keyUp("w")
+                time.sleep(0.1)
                 pydirectinput.keyDown("s")
                 time.sleep(0.1)
                 pydirectinput.keyUp("s")
