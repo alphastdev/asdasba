@@ -90,7 +90,7 @@ def metindetect(ekranboyutx, ekranboyuty, imgsize):
         # --- YOLO INFERENCE (direct input, zero scaling) ---
         results = model.predict(
             frame,
-            imgsz=320,        # YOLO kendi letterbox yapar
+            imgsz=imgsize,        # YOLO kendi letterbox yapar
             conf=0.3,
             max_det=1,
             device=device
@@ -319,7 +319,7 @@ while True:
                 if lookingcounterkalansure >= 15:
                     lookingcounter = None
                     kameraduzeltme()
-            x, y = metindetect(800,600,640)
+            x, y = metindetect(800,600,320)
             if x == None:
                 pyautogui.moveTo(70, 70)
                 press_key("q",0.2,0.1)
@@ -331,7 +331,7 @@ while True:
                 time.sleep(0.1)
                 pydirectinput.keyUp("q")
                 time.sleep(0.5)
-                x, y = metindetect(800, 600,640) # tekrar none geliyor bazen
+                x, y = metindetect(800, 600,320) # tekrar none geliyor bazen
                 if not x == None:
                     pyautogui.moveTo(x, y + 5)
                     time.sleep(0.1)
