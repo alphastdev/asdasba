@@ -37,7 +37,7 @@ threshold = 0.8
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"[YOLO] Model yükleniyor... ({device})")
-model = YOLO("kendiyapim1ve2.pt").to(device)
+model = YOLO("320e320t1ve2koy.pt").to(device)
 print(f"[YOLO] Model başarıyla yüklendi → {device}")
 
 BOT_CONTROL = "bot_control"
@@ -90,11 +90,10 @@ def metindetect(ekranboyutx, ekranboyuty, imgsize):
         # --- YOLO INFERENCE (direct input, zero scaling) ---
         results = model.predict(
             frame,
-            imgsz=imgsize,        # YOLO kendi letterbox yapar
-            conf=0.5,
+            imgsz=320,        # YOLO kendi letterbox yapar
+            conf=0.3,
             max_det=1,
-            device=device,
-            verbose=False
+            device=device
         )
 
         boxes = results[0].boxes.xyxy
