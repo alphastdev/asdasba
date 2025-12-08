@@ -37,7 +37,7 @@ threshold = 0.8
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"[YOLO] Model yükleniyor... ({device})")
-model = YOLO("320e320t1ve2koy.pt").to(device)
+model = YOLO("kendiyapim1ve2.pt").to(device)
 print(f"[YOLO] Model başarıyla yüklendi → {device}")
 
 BOT_CONTROL = "bot_control"
@@ -91,9 +91,10 @@ def metindetect(ekranboyutx, ekranboyuty, imgsize):
         results = model.predict(
             frame,
             imgsz=imgsize,        # YOLO kendi letterbox yapar
-            conf=0.3,
+            conf=0.5,
             max_det=1,
-            device=device
+            device=device,
+            verbose=False
         )
 
         boxes = results[0].boxes.xyxy
@@ -319,7 +320,7 @@ while True:
                 if lookingcounterkalansure >= 15:
                     lookingcounter = None
                     kameraduzeltme()
-            x, y = metindetect(800,600,320)
+            x, y = metindetect(800,600,640)
             if x == None:
                 pyautogui.moveTo(70, 70)
                 press_key("q",0.2,0.1)
@@ -331,7 +332,7 @@ while True:
                 time.sleep(0.1)
                 pydirectinput.keyUp("q")
                 time.sleep(0.5)
-                x, y = metindetect(800, 600,320) # tekrar none geliyor bazen
+                x, y = metindetect(800, 600,640) # tekrar none geliyor bazen
                 if not x == None:
                     pyautogui.moveTo(x, y + 5)
                     time.sleep(0.1)
