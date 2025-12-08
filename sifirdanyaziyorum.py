@@ -324,8 +324,9 @@ while True:
             x, y = metindetect(800,600,640)
             if x == None:
                 pyautogui.moveTo(70, 70)
-                press_key("q",0.2,0.1)
-                press_key("q", 0.2, 0.1)
+                pydirectinput.keyDown("q")
+                time.sleep(0.5)
+                pydirectinput.keyUp("q")
             if not x == None:
                 pydirectinput.keyUp("w")
                 time.sleep(0.1)
